@@ -4,533 +4,549 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Developer Portfolio</title>
+<title>HemaVerse | .NET Developer</title>
+<meta name="description" content="Hema Sankari's developer portfolio featuring C#, .NET, ASP.NET Core, SQL Server and WPF projects.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+:root {
+  --bg: #050414;
+  --panel: #0d0a25;
+  --pink: #f34bff;
+  --purple: #8c52ff;
+  --blue: #36cfff;
+  --white: #f8f5ff;
+  --muted: #b9b3d7;
 }
-
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 body {
-    font-family: Arial, sans-serif;
-    background: #05091f;
-    color: white;
+  background:var(--bg);
+  color:var(--white);
+  font-family:Inter, sans-serif;
+  overflow-x:hidden;
 }
+a { color:inherit; text-decoration:none; }
+button { font:inherit; }
+#stars {
+  position:fixed; inset:0; width:100%; height:100%;
+  pointer-events:none; z-index:-1;
+}
+.glow {
+  position:fixed; width:400px; height:400px;
+  border-radius:50%; filter:blur(130px);
+  opacity:.18; pointer-events:none; z-index:-1;
+}
+.glow.one { background:#8c32ff; top:5%; left:-180px; }
+.glow.two { background:#ef35e8; right:-200px; top:40%; }
 
-/* NAVBAR */
 header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(8, 13, 39, 0.95);
-    border-bottom: 1px solid #342a70;
-    padding: 20px 7%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 18px;
+  position:fixed; top:0; width:100%; z-index:20;
+  padding:14px 6%; display:flex; align-items:center;
+  justify-content:space-between; gap:20px;
+  background:rgba(5,4,20,.8); backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(173,110,255,.13);
 }
-
+.brand { display:flex; align-items:center; gap:12px; flex-shrink:0; }
 .logo {
-    font-size: 25px;
-    font-weight: bold;
-    color: #ff45d4;
-    text-shadow: 0 0 15px #ff45d4;
+  width:53px; height:53px; border-radius:50%;
+  display:grid; place-items:center; position:relative;
+  background:linear-gradient(140deg,#0a0822,#19103c);
+  border:1px solid #c56aff;
+  box-shadow:0 0 12px #a53bff, inset 0 0 14px #6329a5;
 }
-
-nav {
-    display: flex;
-    gap: 22px;
-    flex-wrap: wrap;
+.logo::before {
+  content:""; position:absolute; inset:4px; border-radius:50%;
+  border:1px solid var(--blue); opacity:.8;
 }
-
-nav a {
-    color: #dce2ff;
-    text-decoration: none;
-    font-size: 13px;
-    transition: 0.3s;
+.logo span {
+  font-family:"Playfair Display",serif; font-size:21px;
+  letter-spacing:-3px; padding-right:3px;
+  background:linear-gradient(120deg,#fff,#f65aff,#54d8ff);
+  color:transparent; background-clip:text;
 }
-
-nav a:hover {
-    color: #ff45d4;
+.brand-name { font-size:19px; font-weight:800; }
+.brand-name span {
+  background:linear-gradient(90deg,var(--pink),var(--blue));
+  color:transparent; background-clip:text;
 }
+.brand small { display:block; color:var(--muted); font-size:10px; margin-top:4px; }
+nav { display:flex; align-items:center; gap:22px; }
+nav a { color:#d5cfea; font-size:12px; transition:.3s; }
+nav a:hover { color:var(--pink); }
+.menu { display:none; border:1px solid #6742a8; color:white;
+  background:#100b2a; border-radius:9px; padding:8px 12px; cursor:pointer; }
 
-/* HERO */
 .hero {
-    min-height: 520px;
-    padding: 80px 10%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 45px;
-    flex-wrap: wrap;
-    background:
-        radial-gradient(circle at 80% 30%, #35166b 0%, transparent 35%),
-        radial-gradient(circle at 10% 90%, #36114f 0%, transparent 35%);
+  min-height:100vh; padding:130px 8% 95px;
+  display:grid; grid-template-columns:1.1fr .9fr;
+  align-items:center; gap:35px; position:relative;
 }
-
-.hero-content {
-    flex: 1 1 350px;
+.eyebrow {
+  color:#d6c9ff; letter-spacing:3px; text-transform:uppercase;
+  font-size:11px; margin-bottom:20px;
+  animation:fadeUp .8s both;
 }
-
-.tag {
-    display: inline-block;
-    border: 1px solid #8d4bff;
-    border-radius: 25px;
-    padding: 10px 16px;
-    color: #cdb7ff;
-    margin-bottom: 25px;
-    font-size: 13px;
-}
-
+.eyebrow span { color:var(--pink); }
 .hero h1 {
-    font-size: clamp(38px, 5vw, 60px);
-    line-height: 1.2;
-    margin-bottom: 18px;
+  font-size:clamp(40px,6vw,76px); line-height:1.12;
+  font-weight:800; letter-spacing:-3px;
 }
-
+.hero h1 .word { display:block; }
 .gradient-text {
-    background: linear-gradient(90deg, #ff42d0, #a35cff, #35caff);
-    -webkit-background-clip: text;
-    color: transparent;
+  background:linear-gradient(100deg,#ff66e8,#b49aff,#4ddcff,#ff66e8);
+  background-size:300% auto; color:transparent;
+  background-clip:text; animation:gradientMove 5s linear infinite;
 }
-
-.hero h3 {
-    margin-bottom: 15px;
-    font-size: 21px;
+.letter {
+  display:inline-block;
+  animation:letterIn .65s both;
+  animation-delay:calc(var(--i) * 65ms);
 }
-
-.hero p {
-    color: #b9c5e8;
-    line-height: 1.8;
-    max-width: 520px;
+.subtitle { margin-top:18px; font-size:clamp(15px,2vw,19px); color:#e3dcfa; }
+.subtitle strong { color:var(--blue); font-weight:600; }
+.description {
+  margin-top:20px; color:var(--muted); line-height:1.9;
+  max-width:520px; font-size:14px;
 }
-
+.typing-line { color:#fff; margin-top:17px; font-size:15px; }
+#typed { color:var(--pink); font-weight:700; }
+.cursor { color:var(--blue); animation:blink .7s infinite; }
+.buttons { display:flex; flex-wrap:wrap; gap:13px; margin-top:28px; }
 .btn {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 14px 23px;
-    border-radius: 30px;
-    background: linear-gradient(90deg, #ff39c9, #704cff, #159fff);
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 0 22px #883cff55;
-    transition: 0.3s;
+  display:inline-flex; align-items:center; justify-content:center; gap:9px;
+  padding:13px 21px; border-radius:40px; font-size:13px;
+  font-weight:700; transition:.25s; cursor:pointer;
 }
-
-.btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 30px #ff39c988;
+.btn.primary {
+  color:white; background:linear-gradient(100deg,#d832f4,#8052ff,#2fc9fa);
+  box-shadow:0 0 25px #b32dff42;
 }
-
-.code-card {
-    flex: 1 1 300px;
-    max-width: 420px;
-    padding: 28px;
-    border-radius: 20px;
-    border: 1px solid #7955ff;
-    background: linear-gradient(145deg, #111b43, #090e29);
-    box-shadow: 0 0 35px #6d36ff55;
-    transform: rotate(1deg);
+.btn.secondary { border:1px solid #9370d9; background:#ffffff05; }
+.btn:hover { transform:translateY(-4px); box-shadow:0 0 25px #c54dff65; }
+.tags { display:flex; flex-wrap:wrap; gap:9px; margin-top:28px; }
+.tag {
+  border:1px solid #7048b8; background:#130d31;
+  border-radius:30px; padding:8px 12px; color:#dcd4ff;
+  font-size:11px; animation:float 4s ease-in-out infinite;
 }
+.tag:nth-child(2n) { animation-delay:-2s; }
 
-.code-card h2 {
-    color: #43dcff;
-    margin-bottom: 22px;
+.hero-art { display:grid; place-items:center; position:relative; min-height:430px; }
+.orbit {
+  width:min(330px,75vw); aspect-ratio:1; border-radius:50%;
+  display:grid; place-items:center; position:relative;
+  border:2px solid transparent;
+  background:linear-gradient(#09061e,#09061e) padding-box,
+    conic-gradient(from 0deg,#863fff,#ff47e8,#4ce5ff,#863fff) border-box;
+  box-shadow:0 0 25px #b33cff40,inset 0 0 35px #8b36ff17;
+  animation:orbitGlow 4s ease-in-out infinite;
 }
-
-.code-card p {
-    padding: 12px 0;
-    border-bottom: 1px solid #2b3766;
-    color: #e0dfff;
-    font-family: monospace;
+.orbit::before {
+  content:""; position:absolute; width:120%; height:30%;
+  border:2px solid #d94cff; border-radius:50%;
+  transform:rotate(-28deg); box-shadow:0 0 20px #ba42ff80;
 }
-
-.code-card span {
-    color: #ff50d5;
+.orbit::after {
+  content:""; position:absolute; inset:16px; border-radius:50%;
+  border:1px dashed #7654c9; animation:spin 28s linear infinite;
 }
-
-/* COMMON SECTIONS */
-section.content-section {
-    padding: 65px 8%;
+.monogram {
+  font-family:"Playfair Display",serif; font-size:clamp(80px,13vw,150px);
+  letter-spacing:-13px; padding-right:13px;
+  background:linear-gradient(140deg,#fff,#f75cff 40%,#63dfff 75%,#b18aff);
+  color:transparent; background-clip:text;
+  filter:drop-shadow(0 0 20px #d849ff88);
+  animation:monogramFloat 3s ease-in-out infinite;
 }
-
-.section-title {
-    text-align: center;
-    font-size: 34px;
-    margin-bottom: 35px;
+.crown {
+  position:absolute; top:15%; font-size:27px;
+  color:#ff86fa; filter:drop-shadow(0 0 12px #f34bff);
+  animation:float 3s ease-in-out infinite;
 }
-
-.section-title span {
-    color: #bd70ff;
+.spark {
+  position:absolute; color:#8feaff; font-size:27px;
+  text-shadow:0 0 15px var(--blue); animation:twinkle 2s infinite;
 }
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 22px;
+.s1 { top:10%; right:9%; }
+.s2 { bottom:15%; left:6%; animation-delay:1s; }
+.float-chip {
+  position:absolute; border:1px solid #623fba;
+  background:#100a2be8; padding:12px 15px;
+  border-radius:13px; color:#e8deff; font-size:12px;
+  box-shadow:0 0 20px #692dff22; animation:float 4s ease-in-out infinite;
 }
+.chip1 { top:10%; left:-1%; }
+.chip2 { bottom:12%; right:-2%; animation-delay:-2s; }
+.scroll-note {
+  position:absolute; bottom:25px; left:50%; transform:translateX(-50%);
+  color:#aaa0cb; font-size:11px; letter-spacing:2px;
+  animation:float 2s infinite;
+}
+.scroll-note span { display:block; text-align:center; color:var(--pink); font-size:22px; }
 
+section { padding:95px 8%; scroll-margin-top:80px; }
+.section-heading { text-align:center; margin-bottom:45px; }
+.kicker { color:var(--pink); font-size:11px; letter-spacing:3px; text-transform:uppercase; }
+.section-heading h2 { font-size:clamp(29px,4vw,43px); margin-top:12px; }
+.section-heading h2 span { color:var(--pink); }
+.section-heading p { color:var(--muted); font-size:13px; margin-top:12px; line-height:1.8; }
+
+.about-grid { display:grid; grid-template-columns:1fr 1.2fr; gap:45px; align-items:center; }
+.about-art {
+  min-height:280px; display:grid; place-items:center;
+  border-radius:25px; border:1px solid #673bb2;
+  background:radial-gradient(circle at 50% 40%,#3e176b,#110b2c 60%,#08051a);
+  box-shadow:inset 0 0 35px #a32fff19; overflow:hidden;
+}
+.about-symbol { font-size:100px; filter:drop-shadow(0 0 25px #c748ff); animation:monogramFloat 4s infinite; }
+.about-copy h3 { font-size:26px; margin-bottom:17px; }
+.about-copy h3 span { color:var(--pink); }
+.about-copy p { color:var(--muted); line-height:1.9; font-size:14px; margin-bottom:13px; }
+.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:25px; }
+.stat { border:1px solid #35245f; background:#0c0820; border-radius:14px; padding:18px 10px; text-align:center; }
+.stat strong { display:block; font-size:20px; color:var(--pink); }
+.stat small { display:block; color:var(--muted); font-size:10px; margin-top:7px; }
+
+.skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:17px; }
 .card {
-    background: linear-gradient(145deg, #121b40, #0b1230);
-    border: 1px solid #303e77;
-    border-radius: 17px;
-    padding: 25px;
-    transition: 0.3s;
-    box-shadow: 0 10px 25px #0002;
+  padding:24px; background:linear-gradient(145deg,#100b28,#090619);
+  border:1px solid #33215c; border-radius:18px; transition:.3s;
 }
+.card:hover { transform:translateY(-6px); border-color:#c14bff; box-shadow:0 10px 35px #9e31ff18; }
+.card .icon { font-size:27px; margin-bottom:15px; }
+.card h3 { font-size:16px; margin-bottom:10px; }
+.card p { color:var(--muted); font-size:12px; line-height:1.8; }
+.skill-pills { display:flex; flex-wrap:wrap; gap:7px; margin-top:14px; }
+.skill-pills span { font-size:10px; border:1px solid #53368d; border-radius:20px; padding:6px 9px; color:#d9ceff; }
 
-.card:hover {
-    transform: translateY(-7px);
-    border-color: #a64fff;
-    box-shadow: 0 0 25px #8a39ff33;
+.timeline { max-width:800px; margin:auto; border-left:2px solid #7c39c9; padding-left:28px; }
+.timeline-item { position:relative; margin-bottom:28px; }
+.timeline-item::before {
+  content:""; position:absolute; width:11px; height:11px;
+  background:var(--pink); border-radius:50%; left:-35px; top:6px;
+  box-shadow:0 0 14px var(--pink);
 }
+.timeline-item h3 { font-size:18px; }
+.timeline-item .date { color:var(--blue); font-size:12px; margin:8px 0; }
+.timeline-item p { color:var(--muted); font-size:13px; line-height:1.8; }
 
-.card h3 {
-    color: #61dfff;
-    margin-bottom: 15px;
-    font-size: 20px;
+.projects-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+.project-card {
+  border:1px solid #3c2768; border-radius:19px; overflow:hidden;
+  background:linear-gradient(145deg,#130c2d,#080619); transition:.3s;
 }
-
-.card p {
-    color: #bdc8e6;
-    font-size: 14px;
-    line-height: 1.8;
+.project-card:hover { transform:translateY(-6px); border-color:var(--pink); }
+.project-banner {
+  height:125px; display:grid; place-items:center; font-size:48px;
+  background:radial-gradient(circle,#3c1764,#100a29 70%);
+  border-bottom:1px solid #3c2768;
 }
+.project-content { padding:23px; }
+.project-content h3 { font-size:18px; margin-bottom:10px; }
+.project-content p { color:var(--muted); font-size:13px; line-height:1.8; }
+.project-content .skill-pills { margin-bottom:17px; }
 
-/* SKILLS */
-.skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
+.edu-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:15px; }
+.edu-card { border:1px solid #3d2869; background:#0d0923; border-radius:17px; padding:22px; }
+.edu-card .edu-icon { font-size:26px; margin-bottom:14px; }
+.edu-card h3 { font-size:15px; line-height:1.6; }
+.edu-card p { color:var(--muted); font-size:12px; margin-top:9px; line-height:1.7; }
+.certificate { max-width:750px; margin:12px auto; }
+.contact-box {
+  max-width:800px; margin:auto; text-align:center; padding:45px 25px;
+  border:1px solid #57318d; border-radius:25px;
+  background:radial-gradient(ellipse at top,#291044,#0c0821 70%);
 }
+.contact-box h2 { font-size:clamp(27px,5vw,42px); }
+.contact-box h2 span { color:var(--pink); }
+.contact-box p { color:var(--muted); line-height:1.8; margin:15px auto 25px; max-width:500px; font-size:14px; }
+footer { text-align:center; border-top:1px solid #271b48; padding:25px; color:#a69abb; font-size:11px; }
+footer span { color:var(--pink); }
 
-.skill {
-    padding: 12px 18px;
-    border-radius: 25px;
-    border: 1px solid #8050ff;
-    background: #191745;
-    color: #e8d9ff;
-    font-size: 14px;
-    transition: 0.3s;
+.reveal { opacity:0; transform:translateY(25px); transition:opacity .7s,transform .7s; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+@keyframes letterIn { from {opacity:0; transform:translateY(35px) rotateX(70deg)} to {opacity:1; transform:translateY(0) rotateX(0)} }
+@keyframes gradientMove { to { background-position:300% center } }
+@keyframes float { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-10px) } }
+@keyframes monogramFloat { 0%,100% { transform:translateY(0) scale(1) } 50% { transform:translateY(-8px) scale(1.025) } }
+@keyframes orbitGlow { 0%,100% { box-shadow:0 0 25px #b33cff40,inset 0 0 35px #8b36ff17 } 50% { box-shadow:0 0 45px #d23cff65,inset 0 0 50px #8b36ff28 } }
+@keyframes spin { to { transform:rotate(360deg) } }
+@keyframes twinkle { 0%,100% { opacity:.4; transform:scale(.8) } 50% { opacity:1; transform:scale(1.3) } }
+@keyframes blink { 50% { opacity:0 } }
+@keyframes fadeUp { from { opacity:0; transform:translateY(15px) } to { opacity:1; transform:translateY(0) } }
+
+@media(max-width:900px) {
+  header { padding:12px 5%; }
+  nav { gap:12px; }
+  nav a { font-size:11px; }
+  .hero { padding-left:6%; padding-right:6%; gap:10px; }
+  .hero-art { min-height:350px; }
+  .skills-grid { grid-template-columns:repeat(2,1fr); }
 }
-
-.skill:nth-child(3n+1) {
-    border-color: #ff48d1;
-    background: #38133d;
+@media(max-width:700px) {
+  header { padding:10px 5%; }
+  .brand-name { font-size:16px; }
+  .logo { width:45px; height:45px; }
+  .menu { display:block; }
+  nav {
+    display:none; position:absolute; top:70px; left:4%; right:4%;
+    padding:20px; border:1px solid #50317e; border-radius:15px;
+    background:#0b071e; flex-direction:column; align-items:stretch; gap:0;
+  }
+  nav.open { display:flex; }
+  nav a { padding:12px 8px; font-size:13px; border-bottom:1px solid #ffffff0c; }
+  .hero { grid-template-columns:1fr; text-align:center; padding-top:125px; gap:5px; }
+  .hero h1 { letter-spacing:-2px; }
+  .description { margin-left:auto; margin-right:auto; }
+  .buttons,.tags { justify-content:center; }
+  .hero-art { min-height:350px; grid-row:1; }
+  .orbit { width:245px; }
+  .monogram { font-size:105px; }
+  .chip1 { left:0; }
+  .chip2 { right:0; }
+  .scroll-note { display:none; }
+  section { padding:75px 6%; }
+  .about-grid { grid-template-columns:1fr; gap:25px; }
+  .about-art { min-height:220px; }
+  .skills-grid,.projects-grid,.edu-grid { grid-template-columns:1fr; }
+  .stats { grid-template-columns:repeat(3,1fr); }
+  .stat { padding:14px 5px; }
+  .stat strong { font-size:16px; }
 }
-
-.skill:nth-child(3n+2) {
-    border-color: #26caff;
-    background: #102b49;
-}
-
-.skill:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 15px #9a45ff66;
-}
-
-/* EXPERIENCE */
-.experience-box {
-    max-width: 800px;
-    margin: auto;
-    border-left: 3px solid #a44cff;
-    padding: 10px 25px;
-}
-
-.experience-box h3 {
-    color: #ff62d7;
-    margin-bottom: 12px;
-}
-
-.experience-box p {
-    color: #c2cbea;
-    line-height: 1.9;
-    margin-bottom: 12px;
-}
-
-/* EDUCATION / CERTIFICATES */
-.highlight {
-    color: #ff74db;
-    font-weight: bold;
-}
-
-/* CONTACT */
-.contact {
-    text-align: center;
-    background: radial-gradient(circle, #26134c, #070c24 70%);
-}
-
-.contact p {
-    color: #c4cbed;
-    line-height: 1.8;
-}
-
-footer {
-    text-align: center;
-    padding: 25px;
-    color: #9caad2;
-    border-top: 1px solid #30365f;
-    font-size: 13px;
-}
-
-@media (max-width: 650px) {
-    header {
-        justify-content: center;
-    }
-
-    nav {
-        justify-content: center;
-        gap: 15px;
-    }
-
-    .hero {
-        padding: 55px 7%;
-    }
-
-    section.content-section {
-        padding: 50px 6%;
-    }
-
-    .section-title {
-        font-size: 28px;
-    }
-
-    .code-card {
-        transform: none;
-    }
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; scroll-behavior:auto!important; transition:none!important; }
 }
 </style>
 </head>
-
 <body>
 
+<canvas id="stars"></canvas>
+<div class="glow one"></div><div class="glow two"></div>
+
 <header>
-    <div class="logo">✦ MY PORTFOLIO</div>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#education">Education</a>
-        <a href="#certificates">Certificates</a>
-    </nav>
+  <a class="brand" href="#home" aria-label="HemaVerse home">
+    <div class="logo"><span>H.S</span></div>
+    <div><div class="brand-name">Hema<span>Verse</span></div><small>Code · Build · Grow</small></div>
+  </a>
+  <button class="menu" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  <nav id="nav">
+    <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a>
+    <a href="#experience">Experience</a><a href="#projects">Projects</a>
+    <a href="#education">Education</a><a href="#certificates">Certificates</a><a href="#contact">Contact</a>
+  </nav>
 </header>
 
-<!-- HOME -->
+<main>
 <section class="hero" id="home">
-    <div class="hero-content">
-        <div class="tag">✦ Welcome to my portfolio</div>
-
-        <h1>
-            Hello, I'm a<br>
-            <span class="gradient-text">.NET Developer</span>
-        </h1>
-
-        <h3>Building thoughtful digital experiences</h3>
-
-        <p>
-            I am passionate about learning and growing in .NET technologies,
-            developing useful applications and solving real-world problems
-            through clean and efficient code.
-        </p>
-
-        <a href="#projects" class="btn">Explore My Work →</a>
+  <div class="hero-copy">
+    <div class="eyebrow">WELCOME TO MY DIGITAL WORLD <span>✦</span></div>
+    <h1><span class="word">Hello, I'm</span><span class="word gradient-text" id="animatedName">Hema Sankari</span></h1>
+    <div class="subtitle">.NET Developer <strong>|</strong> C# Developer <strong>|</strong> Problem Solver</div>
+    <p class="description">I build practical applications and turn ideas into useful digital experiences. I'm passionate about learning, solving problems, and growing as a developer.</p>
+    <div class="typing-line">I work with <span id="typed"></span><span class="cursor">|</span></div>
+    <div class="buttons">
+      <a class="btn primary" href="#projects">Explore My Projects ↗</a>
+      <a class="btn secondary" href="#about">Discover My Story ↓</a>
     </div>
-
-    <div class="code-card">
-        <h2>⌘ Developer.cs</h2>
-        <p><span>01</span> &nbsp; C# Development</p>
-        <p><span>02</span> &nbsp; ASP.NET Core</p>
-        <p><span>03</span> &nbsp; Web API</p>
-        <p><span>04</span> &nbsp; WPF & MVVM</p>
-        <p><span>05</span> &nbsp; SQL Server</p>
-        <p style="color:#43e7c5">Build · Learn · Grow ✦</p>
+    <div class="tags">
+      <span class="tag">C#</span><span class="tag">ASP.NET Core</span><span class="tag">SQL Server</span><span class="tag">WPF</span><span class="tag">Web API</span>
     </div>
+  </div>
+
+  <div class="hero-art" aria-label="H.S neon monogram">
+    <div class="float-chip chip1">✧ Creative Mind</div>
+    <div class="float-chip chip2">⌘ Developer Mode</div>
+    <div class="orbit">
+      <span class="crown">♛</span>
+      <div class="monogram">H.S</div>
+    </div>
+    <span class="spark s1">✦</span><span class="spark s2">✧</span>
+  </div>
+  <div class="scroll-note">SCROLL TO EXPLORE <span>↓</span></div>
 </section>
 
-<!-- ABOUT -->
-<section class="content-section" id="about">
-    <h2 class="section-title">About <span>Me</span></h2>
-
-    <div class="cards">
-        <div class="card">
-            <h3>👩‍💻 Who I Am</h3>
-            <p>
-                A dedicated learner interested in .NET development,
-                application design and creating practical software solutions.
-            </p>
-        </div>
-
-        <div class="card">
-            <h3>🎯 My Goal</h3>
-            <p>
-                To continue improving my technical skills, contribute to
-                meaningful projects and grow as a .NET developer.
-            </p>
-        </div>
-
-        <div class="card">
-            <h3>🚀 My Approach</h3>
-            <p>
-                Learn through practice, write understandable code,
-                collaborate with others and keep improving every day.
-            </p>
-        </div>
+<section id="about">
+  <div class="section-heading reveal"><div class="kicker">A LITTLE ABOUT ME</div><h2>Behind the <span>Code</span></h2><p>Curious mind. Continuous learner. Future-focused developer.</p></div>
+  <div class="about-grid reveal">
+    <div class="about-art"><div class="about-symbol">H.S</div></div>
+    <div class="about-copy">
+      <h3>Hi, I'm <span>Hema Sankari</span> 👋</h3>
+      <p>I am a B.E. Electronics and Communication Engineering graduate (2022–2026), currently developing my skills in .NET and application development.</p>
+      <p>I enjoy working with C#, SQL, ASP.NET Core, WPF and related technologies. I like exploring new concepts and building projects that help me learn through practice.</p>
+      <p>My goal is to begin my IT career, gain real-world experience, and grow into a skilled software developer.</p>
+      <div class="stats">
+        <div class="stat"><strong>2022–26</strong><small>B.E. ECE</small></div>
+        <div class="stat"><strong>C# + SQL</strong><small>Core Skills</small></div>
+        <div class="stat"><strong>Always</strong><small>Learning</small></div>
+      </div>
     </div>
+  </div>
 </section>
 
-<!-- SKILLS -->
-<section class="content-section" id="skills">
-    <h2 class="section-title">Technical <span>Skills</span></h2>
+<section id="skills">
+  <div class="section-heading reveal"><div class="kicker">WHAT I WORK WITH</div><h2>My <span>Skill Set</span></h2><p>Technologies and tools I'm learning and using in my projects.</p></div>
+  <div class="skills-grid">
+    <article class="card reveal"><div class="icon">⌘</div><h3>Programming</h3><p>Building logic and application functionality.</p><div class="skill-pills"><span>C#</span><span>OOP</span><span>LINQ</span></div></article>
+    <article class="card reveal"><div class="icon">🌐</div><h3>Web Development</h3><p>Creating web applications and REST APIs.</p><div class="skill-pills"><span>ASP.NET Core</span><span>MVC</span><span>Web API</span><span>HTML</span><span>CSS</span><span>Bootstrap</span></div></article>
+    <article class="card reveal"><div class="icon">🗄️</div><h3>Database</h3><p>Working with relational data and queries.</p><div class="skill-pills"><span>SQL Server</span><span>SQL</span><span>ADO.NET</span><span>EF Core</span></div></article>
+    <article class="card reveal"><div class="icon">🖥️</div><h3>Desktop Development</h3><p>Exploring Windows desktop application interfaces.</p><div class="skill-pills"><span>WPF</span><span>XAML</span><span>MVVM</span><span>Windows Forms</span></div></article>
+    <article class="card reveal"><div class="icon">🛠️</div><h3>Tools & Workflow</h3><p>Tools for coding, source control and development.</p><div class="skill-pills"><span>Visual Studio</span><span>GitHub</span><span>VS Code</span></div></article>
+    <article class="card reveal"><div class="icon">☁️</div><h3>Exploring Next</h3><p>Expanding my knowledge through guided practice.</p><div class="skill-pills"><span>Azure Basics</span><span>.NET MAUI</span><span>DevOps Basics</span></div></article>
+  </div>
+</section>
 
-    <div class="skills">
-        <span class="skill">C#</span>
-        <span class="skill">.NET Core</span>
-        <span class="skill">ASP.NET Core</span>
-        <span class="skill">ASP.NET MVC</span>
-        <span class="skill">Web API</span>
-        <span class="skill">WPF</span>
-        <span class="skill">MVVM</span>
-        <span class="skill">XAML</span>
-        <span class="skill">HTML</span>
-        <span class="skill">CSS</span>
-        <span class="skill">Bootstrap</span>
-        <span class="skill">SQL Server</span>
-        <span class="skill">ADO.NET</span>
-        <span class="skill">Entity Framework</span>
-        <span class="skill">Azure</span>
-        <span class="skill">GitHub</span>
-        <span class="skill">MAUI</span>
+<section id="experience">
+  <div class="section-heading reveal"><div class="kicker">MY LEARNING JOURNEY</div><h2>Training & <span>Experience</span></h2></div>
+  <div class="timeline reveal">
+    <div class="timeline-item"><h3>.NET Developer Training — JSQUARE</h3><div class="date">March 2026 – Present</div><p>Learning and practising C#, .NET, ASP.NET Core, Web API, WPF, XAML, MVC, MVVM and SQL Server through technical sessions and application projects.</p><p>Developing understanding of object-oriented programming, database integration, application structure and modern software development workflows.</p></div>
+    <div class="timeline-item"><h3>Academic & Personal Projects</h3><div class="date">Hands-on Learning</div><p>Building Windows and web application projects to strengthen coding, database, user interface and debugging skills.</p></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-heading reveal"><div class="kicker">WHAT I'VE BEEN BUILDING</div><h2>Featured <span>Projects</span></h2><p>Application ideas focused on useful features and practical learning.</p></div>
+  <div class="projects-grid">
+    <article class="project-card reveal">
+      <div class="project-banner">🖥️</div>
+      <div class="project-content"><h3>Mentor Application — Desktop</h3><p>A Windows application concept for managing mentor profiles, skills, availability, appointments and reports with database integration.</p><div class="skill-pills"><span>C#</span><span>Windows Forms</span><span>SQL Server</span><span>ADO.NET</span><span>EF</span></div><a class="btn secondary" href="#contact">Project Details ↗</a></div>
+    </article>
+    <article class="project-card reveal">
+      <div class="project-banner">🌐</div>
+      <div class="project-content"><h3>Mentor Application — Web</h3><p>A web platform concept for discovering mentors, viewing profiles, arranging appointments and tracking appointment status.</p><div class="skill-pills"><span>ASP.NET Core MVC</span><span>Web API</span><span>SQL Server</span><span>HTML/CSS</span><span>Bootstrap</span></div><a class="btn secondary" href="#contact">Project Details ↗</a></div>
+    </article>
+  </div>
+  <p style="text-align:center;color:#a99fc5;font-size:12px;margin-top:22px">Add your GitHub project links to these cards when they are ready.</p>
+</section>
+
+<section id="education">
+  <div class="section-heading reveal"><div class="kicker">MY EDUCATION</div><h2>Learning <span>Foundations</span></h2></div>
+  <div class="edu-grid">
+    <article class="edu-card reveal"><div class="edu-icon">🎓</div><h3>B.E. Electronics and Communication Engineering</h3><p>Jayaraj Annapackiam CSI College of Engineering</p><p>2022 – 2026</p><p>Percentage: 83.40%</p></article>
+    <article class="edu-card reveal"><div class="edu-icon">📘</div><h3>Higher Secondary Certificate</h3><p>HSC</p><p>Percentage: 69.17%</p></article>
+    <article class="edu-card reveal"><div class="edu-icon">📚</div><h3>Secondary School Leaving Certificate</h3><p>SSLC</p><p>Percentage: 64.60%</p></article>
+  </div>
+</section>
+
+<section id="certificates">
+  <div class="section-heading reveal"><div class="kicker">MILESTONES</div><h2>Certificates & <span>Achievements</span></h2></div>
+  <div class="timeline certificate reveal">
+    <div class="timeline-item"><h3>Components Identification — SPECTRA'25</h3><div class="date">Symposium Achievement</div><p>Recognition for participation and achievement in a components identification event.</p></div>
+    <div class="timeline-item"><h3>Laptop Debugging & Analysis</h3><div class="date">Technical Certificate</div><p>Certificate in laptop debugging and analysis.</p></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-box reveal">
+    <div class="kicker">LET'S CONNECT</div>
+    <h2>Ready to build <span>something great?</span></h2>
+    <p>I'm looking for entry-level opportunities where I can contribute, keep learning and grow as a developer.</p>
+    <div class="buttons" style="justify-content:center">
+      <a class="btn primary" href="https://github.com/HemaSankari2614" target="_blank" rel="noopener">GitHub Profile ↗</a>
+      <a class="btn secondary" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
     </div>
+  </div>
 </section>
+</main>
 
-<!-- EXPERIENCE -->
-<section class="content-section" id="experience">
-    <h2 class="section-title">My <span>Experience</span></h2>
+<footer>Designed with <span>♥</span> by Hema Sankari · HemaVerse · Keep learning, keep building.</footer>
 
-    <div class="experience-box">
-        <h3>JSQUARE — Internship / Training</h3>
-        <p class="highlight">March 2026 – Present</p>
-        <p>
-            Gaining practical experience with .NET Core, C#, ASP.NET Core,
-            Web API, WPF, MVVM, MVC, XAML, OOP concepts and SQL Server.
-        </p>
-        <p>
-            Learning Windows and web application development, source control,
-            DevOps practices, Agile methodology and IT work culture.
-        </p>
-    </div>
-</section>
+<script>
+// Animate each letter in the name
+const name = document.getElementById("animatedName");
+const fullName = "Hema Sankari";
+name.innerHTML = [...fullName].map((letter, i) =>
+  `<span class="letter" style="--i:${i}">${letter === " " ? "&nbsp;" : letter}</span>`
+).join("");
 
-<!-- PROJECTS -->
-<section class="content-section" id="projects">
-    <h2 class="section-title">Featured <span>Projects</span></h2>
+// Typing effect
+const words = ["C#", ".NET Core", "ASP.NET Core", "SQL Server", "WPF & XAML", "Web API"];
+const typed = document.getElementById("typed");
+let wordIndex = 0, charIndex = 0, deleting = false;
+function typeEffect() {
+  const word = words[wordIndex];
+  typed.textContent = word.substring(0, charIndex);
+  if (!deleting && charIndex < word.length) {
+    charIndex++;
+    setTimeout(typeEffect, 110);
+  } else if (!deleting) {
+    deleting = true;
+    setTimeout(typeEffect, 1000);
+  } else if (charIndex > 0) {
+    charIndex--;
+    setTimeout(typeEffect, 45);
+  } else {
+    deleting = false;
+    wordIndex = (wordIndex + 1) % words.length;
+    setTimeout(typeEffect, 250);
+  }
+}
+typeEffect();
 
-    <div class="cards">
-        <div class="card">
-            <h3>💻 Mentor Application — Windows</h3>
-            <p>
-                A desktop application for managing mentor profiles, skills,
-                availability, appointments, reports and activities.
-            </p>
-            <br>
-            <p class="highlight">C# · Windows Forms · SQL Server · ADO.NET</p>
-        </div>
+// Mobile navigation
+const menuBtn = document.getElementById("menuBtn");
+const nav = document.getElementById("nav");
+menuBtn.addEventListener("click", () => {
+  const opened = nav.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", String(opened));
+});
+nav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => {
+  nav.classList.remove("open");
+  menuBtn.setAttribute("aria-expanded", "false");
+}));
 
-        <div class="card">
-            <h3>🌐 Mentor Application — Web</h3>
-            <p>
-                A web platform to find mentors by skills, manage profiles,
-                schedule appointments and track appointment status.
-            </p>
-            <br>
-            <p class="highlight">ASP.NET Core MVC · Web API · SQL Server</p>
-        </div>
+// Reveal sections while scrolling
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
 
-        <div class="card">
-            <h3>📚 Student Management System</h3>
-            <p>
-                A practice project concept for managing student details,
-                payments and records using a desktop application and database.
-            </p>
-            <br>
-            <p class="highlight">C# · WPF · SQL Server</p>
-        </div>
-    </div>
-</section>
-
-<!-- EDUCATION -->
-<section class="content-section" id="education">
-    <h2 class="section-title">My <span>Education</span></h2>
-
-    <div class="cards">
-        <div class="card">
-            <h3>🎓 B.E. — ECE</h3>
-            <p>Electronics and Communication Engineering</p>
-            <p>Jayaraj Annapackiam CSI College of Engineering</p>
-            <br>
-            <p class="highlight">2022 – 2026 · 83.40%</p>
-        </div>
-
-        <div class="card">
-            <h3>📘 HSC</h3>
-            <p>St. Johns Girls Higher Secondary School, Nazareth</p>
-            <br>
-            <p class="highlight">69.17%</p>
-        </div>
-
-        <div class="card">
-            <h3>📗 SSLC</h3>
-            <p>Corp. Girls Higher Secondary School</p>
-            <br>
-            <p class="highlight">64.6%</p>
-        </div>
-    </div>
-</section>
-
-<!-- CERTIFICATES -->
-<section class="content-section" id="certificates">
-    <h2 class="section-title">Certificates & <span>Achievements</span></h2>
-
-    <div class="cards">
-        <div class="card">
-            <h3>🏆 SPECTRA'25</h3>
-            <p>
-                Won a prize in Components Identification at a National Level
-                Symposium in 2025.
-            </p>
-        </div>
-
-        <div class="card">
-            <h3>🛠️ Laptop Debugging & Analysis</h3>
-            <p>
-                Certification in laptop hardware diagnostics and repair techniques.
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- CONTACT -->
-<section class="content-section contact" id="contact">
-    <h2 class="section-title">Let's Build Something <span>Great</span></h2>
-    <p>
-        Thank you for visiting my portfolio.<br>
-        Always learning. Always growing. Always building.
-    </p>
-    <a href="#home" class="btn">Back to Top ↑</a>
-</section>
-
-<footer>
-    © 2026 | Developer Portfolio | Designed with ✦ and code
-</footer>
-
+// Animated star background
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+let stars = [];
+function resizeCanvas() {
+  const ratio = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = window.innerWidth * ratio;
+  canvas.height = window.innerHeight * ratio;
+  canvas.style.width = window.innerWidth + "px";
+  canvas.style.height = window.innerHeight + "px";
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  stars = Array.from({length: Math.min(110, Math.floor(window.innerWidth / 10))}, () => ({
+    x: Math.random() * window.innerWidth,
+    y: Math.random() * window.innerHeight,
+    r: Math.random() * 1.5 + .3,
+    speed: Math.random() * .25 + .05,
+    phase: Math.random() * 6
+  }));
+}
+function drawStars() {
+  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  stars.forEach(s => {
+    s.phase += .025;
+    s.y -= s.speed;
+    if (s.y < -3) { s.y = window.innerHeight + 3; s.x = Math.random() * window.innerWidth; }
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(190,145,255,${.25 + (Math.sin(s.phase) + 1) * .3})`;
+    ctx.shadowBlur = 8;
+    ctx.shadowColor = "#9b58ff";
+    ctx.fill();
+  });
+  ctx.shadowBlur = 0;
+  requestAnimationFrame(drawStars);
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+drawStars();
+</script>
 </body>
 </html>
