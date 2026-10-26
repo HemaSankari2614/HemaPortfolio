@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Portfolio</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #05091f;
+    color: white;
+}
+
+/* NAVBAR */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(8, 13, 39, 0.95);
+    border-bottom: 1px solid #342a70;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #ff45d4;
+    text-shadow: 0 0 15px #ff45d4;
+}
+
+nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: #dce2ff;
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #ff45d4;
+}
+
+/* HERO */
+.hero {
+    min-height: 520px;
+    padding: 80px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 45px;
+    flex-wrap: wrap;
+    background:
+        radial-gradient(circle at 80% 30%, #35166b 0%, transparent 35%),
+        radial-gradient(circle at 10% 90%, #36114f 0%, transparent 35%);
+}
+
+.hero-content {
+    flex: 1 1 350px;
+}
+
+.tag {
+    display: inline-block;
+    border: 1px solid #8d4bff;
+    border-radius: 25px;
+    padding: 10px 16px;
+    color: #cdb7ff;
+    margin-bottom: 25px;
+    font-size: 13px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 5vw, 60px);
+    line-height: 1.2;
+    margin-bottom: 18px;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #ff42d0, #a35cff, #35caff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero h3 {
+    margin-bottom: 15px;
+    font-size: 21px;
+}
+
+.hero p {
+    color: #b9c5e8;
+    line-height: 1.8;
+    max-width: 520px;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 23px;
+    border-radius: 30px;
+    background: linear-gradient(90deg, #ff39c9, #704cff, #159fff);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 22px #883cff55;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 30px #ff39c988;
+}
+
+.code-card {
+    flex: 1 1 300px;
+    max-width: 420px;
+    padding: 28px;
+    border-radius: 20px;
+    border: 1px solid #7955ff;
+    background: linear-gradient(145deg, #111b43, #090e29);
+    box-shadow: 0 0 35px #6d36ff55;
+    transform: rotate(1deg);
+}
+
+.code-card h2 {
+    color: #43dcff;
+    margin-bottom: 22px;
+}
+
+.code-card p {
+    padding: 12px 0;
+    border-bottom: 1px solid #2b3766;
+    color: #e0dfff;
+    font-family: monospace;
+}
+
+.code-card span {
+    color: #ff50d5;
+}
+
+/* COMMON SECTIONS */
+section.content-section {
+    padding: 65px 8%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 34px;
+    margin-bottom: 35px;
+}
+
+.section-title span {
+    color: #bd70ff;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+}
+
+.card {
+    background: linear-gradient(145deg, #121b40, #0b1230);
+    border: 1px solid #303e77;
+    border-radius: 17px;
+    padding: 25px;
+    transition: 0.3s;
+    box-shadow: 0 10px 25px #0002;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    border-color: #a64fff;
+    box-shadow: 0 0 25px #8a39ff33;
+}
+
+.card h3 {
+    color: #61dfff;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.card p {
+    color: #bdc8e6;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* SKILLS */
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.skill {
+    padding: 12px 18px;
+    border-radius: 25px;
+    border: 1px solid #8050ff;
+    background: #191745;
+    color: #e8d9ff;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.skill:nth-child(3n+1) {
+    border-color: #ff48d1;
+    background: #38133d;
+}
+
+.skill:nth-child(3n+2) {
+    border-color: #26caff;
+    background: #102b49;
+}
+
+.skill:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 15px #9a45ff66;
+}
+
+/* EXPERIENCE */
+.experience-box {
+    max-width: 800px;
+    margin: auto;
+    border-left: 3px solid #a44cff;
+    padding: 10px 25px;
+}
+
+.experience-box h3 {
+    color: #ff62d7;
+    margin-bottom: 12px;
+}
+
+.experience-box p {
+    color: #c2cbea;
+    line-height: 1.9;
+    margin-bottom: 12px;
+}
+
+/* EDUCATION / CERTIFICATES */
+.highlight {
+    color: #ff74db;
+    font-weight: bold;
+}
+
+/* CONTACT */
+.contact {
+    text-align: center;
+    background: radial-gradient(circle, #26134c, #070c24 70%);
+}
+
+.contact p {
+    color: #c4cbed;
+    line-height: 1.8;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #9caad2;
+    border-top: 1px solid #30365f;
+    font-size: 13px;
+}
+
+@media (max-width: 650px) {
+    header {
+        justify-content: center;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .hero {
+        padding: 55px 7%;
+    }
+
+    section.content-section {
+        padding: 50px 6%;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    .code-card {
+        transform: none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">✦ MY PORTFOLIO</div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#certificates">Certificates</a>
+    </nav>
+</header>
+
+<!-- HOME -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <div class="tag">✦ Welcome to my portfolio</div>
+
+        <h1>
+            Hello, I'm a<br>
+            <span class="gradient-text">.NET Developer</span>
+        </h1>
+
+        <h3>Building thoughtful digital experiences</h3>
+
+        <p>
+            I am passionate about learning and growing in .NET technologies,
+            developing useful applications and solving real-world problems
+            through clean and efficient code.
+        </p>
+
+        <a href="#projects" class="btn">Explore My Work →</a>
+    </div>
+
+    <div class="code-card">
+        <h2>⌘ Developer.cs</h2>
+        <p><span>01</span> &nbsp; C# Development</p>
+        <p><span>02</span> &nbsp; ASP.NET Core</p>
+        <p><span>03</span> &nbsp; Web API</p>
+        <p><span>04</span> &nbsp; WPF & MVVM</p>
+        <p><span>05</span> &nbsp; SQL Server</p>
+        <p style="color:#43e7c5">Build · Learn · Grow ✦</p>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="content-section" id="about">
+    <h2 class="section-title">About <span>Me</span></h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>👩‍💻 Who I Am</h3>
+            <p>
+                A dedicated learner interested in .NET development,
+                application design and creating practical software solutions.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🎯 My Goal</h3>
+            <p>
+                To continue improving my technical skills, contribute to
+                meaningful projects and grow as a .NET developer.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🚀 My Approach</h3>
+            <p>
+                Learn through practice, write understandable code,
+                collaborate with others and keep improving every day.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section class="content-section" id="skills">
+    <h2 class="section-title">Technical <span>Skills</span></h2>
+
+    <div class="skills">
+        <span class="skill">C#</span>
+        <span class="skill">.NET Core</span>
+        <span class="skill">ASP.NET Core</span>
+        <span class="skill">ASP.NET MVC</span>
+        <span class="skill">Web API</span>
+        <span class="skill">WPF</span>
+        <span class="skill">MVVM</span>
+        <span class="skill">XAML</span>
+        <span class="skill">HTML</span>
+        <span class="skill">CSS</span>
+        <span class="skill">Bootstrap</span>
+        <span class="skill">SQL Server</span>
+        <span class="skill">ADO.NET</span>
+        <span class="skill">Entity Framework</span>
+        <span class="skill">Azure</span>
+        <span class="skill">GitHub</span>
+        <span class="skill">MAUI</span>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="content-section" id="experience">
+    <h2 class="section-title">My <span>Experience</span></h2>
+
+    <div class="experience-box">
+        <h3>JSQUARE — Internship / Training</h3>
+        <p class="highlight">March 2026 – Present</p>
+        <p>
+            Gaining practical experience with .NET Core, C#, ASP.NET Core,
+            Web API, WPF, MVVM, MVC, XAML, OOP concepts and SQL Server.
+        </p>
+        <p>
+            Learning Windows and web application development, source control,
+            DevOps practices, Agile methodology and IT work culture.
+        </p>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="content-section" id="projects">
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>💻 Mentor Application — Windows</h3>
+            <p>
+                A desktop application for managing mentor profiles, skills,
+                availability, appointments, reports and activities.
+            </p>
+            <br>
+            <p class="highlight">C# · Windows Forms · SQL Server · ADO.NET</p>
+        </div>
+
+        <div class="card">
+            <h3>🌐 Mentor Application — Web</h3>
+            <p>
+                A web platform to find mentors by skills, manage profiles,
+                schedule appointments and track appointment status.
+            </p>
+            <br>
+            <p class="highlight">ASP.NET Core MVC · Web API · SQL Server</p>
+        </div>
+
+        <div class="card">
+            <h3>📚 Student Management System</h3>
+            <p>
+                A practice project concept for managing student details,
+                payments and records using a desktop application and database.
+            </p>
+            <br>
+            <p class="highlight">C# · WPF · SQL Server</p>
+        </div>
+    </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="content-section" id="education">
+    <h2 class="section-title">My <span>Education</span></h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>🎓 B.E. — ECE</h3>
+            <p>Electronics and Communication Engineering</p>
+            <p>Jayaraj Annapackiam CSI College of Engineering</p>
+            <br>
+            <p class="highlight">2022 – 2026 · 83.40%</p>
+        </div>
+
+        <div class="card">
+            <h3>📘 HSC</h3>
+            <p>St. Johns Girls Higher Secondary School, Nazareth</p>
+            <br>
+            <p class="highlight">69.17%</p>
+        </div>
+
+        <div class="card">
+            <h3>📗 SSLC</h3>
+            <p>Corp. Girls Higher Secondary School</p>
+            <br>
+            <p class="highlight">64.6%</p>
+        </div>
+    </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section class="content-section" id="certificates">
+    <h2 class="section-title">Certificates & <span>Achievements</span></h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>🏆 SPECTRA'25</h3>
+            <p>
+                Won a prize in Components Identification at a National Level
+                Symposium in 2025.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>🛠️ Laptop Debugging & Analysis</h3>
+            <p>
+                Certification in laptop hardware diagnostics and repair techniques.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="content-section contact" id="contact">
+    <h2 class="section-title">Let's Build Something <span>Great</span></h2>
+    <p>
+        Thank you for visiting my portfolio.<br>
+        Always learning. Always growing. Always building.
+    </p>
+    <a href="#home" class="btn">Back to Top ↑</a>
+</section>
+
+<footer>
+    © 2026 | Developer Portfolio | Designed with ✦ and code
+</footer>
+
+</body>
+</html>
